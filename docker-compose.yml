@@ -1,0 +1,26 @@
+version: "3"
+services:
+  mqtt-python:
+    build: .
+    restart: always
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./app_api:/app_api
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    environment:
+      - MQTT_BROKER=test.mosquitto.org
+      - MQTT_TOPIC=alberto/testing
+      - MQTT_PORT=1883
+      - MONGODB_HOST=mongodb://mongodb:27017/
+
+  mongodb:
+    image: mongo:4.4
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/usr/data/db
