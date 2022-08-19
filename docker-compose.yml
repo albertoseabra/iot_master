@@ -15,11 +15,14 @@ services:
       - MQTT_BROKER=test.mosquitto.org
       - MQTT_TOPIC=alberto/testing
       - MQTT_PORT=1883
-      - MONGODB_HOST=mongodb://mongodb:27017/
+      - MONGODB_HOST=mongodb://user:pass@mongodb:27017/
 
   mongodb:
     image: mongo:4.4
     restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=pass
     ports:
       - "27017:27017"
     volumes:
