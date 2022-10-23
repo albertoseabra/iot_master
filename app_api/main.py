@@ -40,6 +40,7 @@ def send_data_mongo(mongo_db, data):
 
 def run():
     client = mqtt.Client()
+    client.username_pw_set(username="", password="")
     client.on_connect = on_connect
     client.on_message = on_message
 
